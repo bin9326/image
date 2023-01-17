@@ -1,0 +1,46 @@
+import numpy as np
+from skimage import data
+from skimage import color
+from skimage.filters import gaussian
+from skimage.filters import unsharp_mask
+from skimage.filters import laplace
+from skimage.filters import sobel
+import matplotlib.pyplot as plt
+
+# Load an example image
+image = data.checkerboard()
+
+# Convert the image to grayscale
+gray_image = color.rgb2gray(image)
+
+# Perform smoothing using a Gaussian filter
+gaussian_kernel = np.outer(signal.gaussian(5, 1), signal.gaussian(5, 1))
+smooth_image = convolve(gray_image, gaussian_kernel)
+
+# Perform sharpening using a Laplacian filter
+sharp_image = gray_image - laplace(gray_image)
+
+# Perform unsharp masking
+unsharp_image = unsharp_mask(gray_image, radius=2, amount=1)
+
+# Perform Sobel
+sobel_image = sobel(gray_image)
+
+# Plot the original and enhanced images
+plt.figure()
+plt.subplot(2, 2, 1)
+plt.imshow(gray_image, cmap='gray')
+plt.title('Original')
+plt.subplot(2, 2, 2)
+plt.imshow(smooth_image, cmap='gray')
+plt.title('Smooth')
+plt.subplot(2, 2, 3)
+plt.imshow(sharp_image, cmap='gray')
+plt.title('Sharp')
+plt.subplot(2, 2, 4)
+plt.imshow(unsharp_image, cmap='gray')
+plt.title('Unsharp Mask')
+plt.figure()
+plt.imshow(sobel_image, cmap='gray')
+plt.title('Sobel')
+plt.show()

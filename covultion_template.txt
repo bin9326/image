@@ -1,0 +1,39 @@
+import numpy as np
+from skimage import data
+from skimage import color
+from scipy import signal
+from scipy import ndimage
+import matplotlib.pyplot as plt
+
+# Load an example image
+image = data.checkerboard()
+
+# Convert the image to grayscale
+gray_image = color.rgb2gray(image)
+
+# Define a convolution kernel
+kernel = np.array([[0, 1, 0], [1, -4, 1], [0, 1, 0]])
+
+# Perform convolution on the image
+convolved_image = signal.convolve2d(gray_image, kernel, boundary='symm', mode='same')
+
+# Define a template to match
+template = np.array([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
+
+# Perform template matching on the image
+matched_image = signal.correlate2d(gray_image, template, mode='same')
+
+# Plot the original and convolved image
+plt.figure()
+plt.subplot(1, 2, 1)
+plt.imshow(gray_image, cmap='gray')
+plt.title('Original')
+plt.subplot(1, 2, 2)
+plt.imshow(convolved_image, cmap='gray')
+plt.title('Convolved')
+
+# Plot the matched image
+plt.figure()
+plt.imshow(matched_image, cmap='gray')
+plt.title('Matched')
+plt.show()

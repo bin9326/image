@@ -1,0 +1,43 @@
+import numpy as np
+from skimage import data
+from skimage import color
+from skimage.morphology import erosion
+from skimage.morphology import dilation
+from skimage.morphology import opening
+from skimage.morphology import closing
+import matplotlib.pyplot as plt
+
+# Load an example image
+image = data.checkerboard()
+
+# Convert the image to binary
+binary_image = image > 0.5
+
+# Perform erosion
+eroded_image = erosion(binary_image)
+
+# Perform dilation
+dilated_image = dilation(binary_image)
+
+# Perform opening
+opened_image = opening(binary_image)
+
+# Perform closing
+closed_image = closing(binary_image)
+
+# Plot the original and enhanced images
+plt.figure()
+plt.subplot(2, 2, 1)
+plt.imshow(binary_image, cmap='gray')
+plt.title('Original')
+plt.subplot(2, 2, 2)
+plt.imshow(eroded_image, cmap='gray')
+plt.title('Erosion')
+plt.subplot(2, 2, 3)
+plt.imshow(dilated_image, cmap='gray')
+plt.title('Dilation')
+plt.subplot(2, 2, 4)
+plt.imshow(opened_image, cmap='gray')
+plt.title('Opening')
+plt.figure()
+plt.imshow(closed_image, cmap='gray
